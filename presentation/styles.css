@@ -27,7 +27,6 @@ a:focus {
   list-style: none;
 }
 .reveal li {
-  padding: 2px 0;
   font-size: 1.5rem;
   line-height: 1.4rem;
 }
@@ -35,18 +34,25 @@ a:focus {
 .events-often ul {
   list-style: none;
 }
-.events-often ul > li {
-  padding: 0 10px;
+
+.txt__highlighted {
+  padding: 5px 10px;
   margin: 10px 20px 0;
   background-color: rgb(216, 144, 200);
   border-radius: 8px;
-}
-
-.txt__highlighted {
-  background-color: rgb(216, 144, 200);
+  line-height: 1rem;
 }
 
 .events--list a {
   font-size: 1rem;
   line-height: 1rem;
+}
+
+.content li {
+  padding: 15px 0;
+}
+.content li ul {
+  list-style: none;
+  padding-top: 15px;
+  margin: 0;
 }
