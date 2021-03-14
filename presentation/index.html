@@ -7,10 +7,10 @@
   <title>DOM events</title>
   <link rel="stylesheet" href="./reveal/reveal.css" />
   <link rel="stylesheet" href="./reveal/theme/league.css" />
+  <link rel="stylesheet" href="./reveal/plugin/highlight/zenburn.css" />
   <link rel="stylesheet" href="./styles.css" />
   <link rel="preconnect" href="https://fonts.gstatic.com" />
-  <link href="https://fonts.googleapis.com/css2?family=Ubuntu+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap"
-    rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Ubuntu+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap" />
 </head>
 
 <body>
@@ -156,15 +156,39 @@
         </ul>
       </section>
       <section>
-        <h2>Обработчики событий</h2>
-        <pre>
-          <code data-line-numbers="1">
-          document.addEventListener('click', () => {});
-          </code>
-        </pre>
-        <!-- <pre><code>
-            addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
-            </code></pre> -->
+        <section>
+          <h2>Обработчик событий</h2>
+          <p style="font-size: 3rem;">- это функция, которая сработает, как только событие произошло.</p>
+          <h3>Способы привязать обработчик к определенному событию:</h3>
+          <p style="font-size: 5rem;">&darr;</p>
+        </section>
+        <section>
+          <p>1. В DOM-дереве c атрибутом <span class="txt__highlighted">on&lt;cобытие&gt;</span>
+          <p>
+          <pre><code data-line-numbers="1-10"><form onsubmit="alert('You subscribed!')">
+  <input type="email" id="email" />
+  <button type="submit">Subscribe!</button>
+</form>
+          </code></pre>
+        </section>
+        <section>
+          <p>2. Присвоить свойство DOM-объекта</p>
+          <pre><code data-line-numbers="1-10"><input id="elem" type="button" value="Нажми меня!">
+<script>
+  elem.onclick = function () {
+    alert('Спасибо');
+  };
+</script>
+            </code></pre>
+        </section>
+        <section>
+          <p>3. addEventListener</p>
+          <pre><code data-line-numbers="1-10">const someElement = document.querySelector('.uniqClass')
+someElement.addEventListener('click', () => {
+  // happen something
+}, { capture: true });
+                      </code></pre>
+        </section>
       </section>
     </div>
   </div>
