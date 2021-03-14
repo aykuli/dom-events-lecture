@@ -37,19 +37,23 @@
               <li style="padding: 10px 0;">4.1. В DOM-дереве c атрибутом on&lt;cобытие></li>
               <li>4.2. Присвоить свойство DOM-объекту</li>
               <li>4.3. Регистрация обработчика на target</li>
+              <li>4.4. Исключения</li>
             </ul>
           </li>
+          <li>5. Объект события</li>
+          <li>6. Всплытие и погружение</li>
+          <li>7. Делегирование</li>
         </ul>
       </section>
       <section>
-        <h2>Событие</h2>
+        <h2>1. Событие</h2>
         <p style="font-size: 3rem;"> – это сигнал от браузера о том, что что-то произошло. <span
             class="txt__highlighted">Все</span> DOM-узлы
           подают такие сигналы.</p>
       </section>
       <section style="text-align: left; top: 150px">
         <section>
-          <h2><a href="https://developer.mozilla.org/ru/docs/Web/API/Event">Интерфейсы, основанные на Event</a></h2>
+          <h2><a href="https://developer.mozilla.org/ru/docs/Web/API/Event">2. Интерфейсы, основанные на Event</a></h2>
           <div style="columns: 300px; font-size: 1rem;" class="events--list">
             <ul>
               <li><a href="/en-US/docs/Web/API/AnimationEvent"><code>AnimationEvent</code></a></li>
@@ -135,8 +139,8 @@
         </section>
       </section>
       <section>
-        <h2>С каких событий начать?</h2>
-        <h3>Часто используемые DOM-события:</h3>
+        <h2>3. С каких событий начать?</h2>
+        <p style="font-size: 2rem;">Часто используемые DOM-события:</p>
         <ul class="events-often">
           <li>События мыши:</li>
           <ul style=" display: flex; list-style: none;">
@@ -165,13 +169,13 @@
       </section>
       <section>
         <section>
-          <h2>Обработчик событий</h2>
+          <h2>4. Обработчик событий</h2>
           <p style="font-size: 3rem;">- это функция, которая сработает, как только событие произошло.</p>
           <p style="margin-top:100px; font-size: 2.5rem;">Способы привязать обработчик к определенному событию:</p>
           <p style="margin-top:20px; margin-left:100px;  font-size: 5rem;">&darr;</p>
         </section>
         <section>
-          <p style="font-size: 2rem;">1. В DOM-дереве c атрибутом <span
+          <p style="font-size: 2rem;">4.1. В DOM-дереве c атрибутом <span
               class="txt__highlighted">on&lt;cобытие&gt;</span>
           <p>
           <pre style="font-size: 1.5rem;"><code data-line-numbers="1-10"><form onsubmit="alert('You subscribed!')">
@@ -181,7 +185,7 @@
           </code></pre>
         </section>
         <section>
-          <p style="font-size: 2rem;">2. Присвоить свойство DOM-объекту</p>
+          <p style="font-size: 2rem;">4.2. Присвоить свойство DOM-объекту</p>
           <pre style="font-size: 1.5rem;"><code data-line-numbers="1-10"><input id="elem" type="button" value="Нажми меня!">
 <script>
   elem.onclick = function () {
@@ -191,7 +195,7 @@
             </code></pre>
         </section>
         <section>
-          <p style="font-size: 2rem;">3. <span class="txt__highlighted">target.addEventListener</span> регистрирует
+          <p style="font-size: 2rem;">4.3. <span class="txt__highlighted">target.addEventListener</span> регистрирует
             определенный обработчик события, вызванного на target.</p>
           <pre style="font-size: 1.5rem; width: 100%;"><code data-line-numbers="1-10">const someElement = document.querySelector('.uniqClass')
 someElement.addEventListener('click', () => // happen something);
@@ -224,83 +228,89 @@ someElement.addEventListener('click', () => // happen something);
             preventDefault().</p>
         </section>
         <section>
-          <p style="font-size: 2rem;">4. Исключения</p>
+          <p style="font-size: 2rem;">4.4. Исключения</p>
           <p>- Для удаления события нужно передать именно ту функцию-обработчик которая была назначена.</p>
           <p>- Обработчики некоторых событий можно назначать только через addEventListener (н-р, DOMContentLoaded).</p>
         </section>
       </section>
       <section>
-        <p style="font-size: 2rem;"> 5. Объект события </p>
-        <pre>
-          <code>/** An event which takes place in the DOM. */
-            interface Event {
-                /**
-                 * Returns true or false depending on how event was initialized. True if event goes through its target's ancestors in reverse tree order, and false otherwise.
-                 */
-                readonly bubbles: boolean;
-                cancelBubble: boolean;
-                /**
-                 * Returns true or false depending on how event was initialized. Its return value does not always carry meaning, but true can indicate that part of the operation during which event was dispatched, can be canceled by invoking the preventDefault() method.
-                 */
-                readonly cancelable: boolean;
-                /**
-                 * Returns true or false depending on how event was initialized. True if event invokes listeners past a ShadowRoot node that is the root of its target, and false otherwise.
-                 */
-                readonly composed: boolean;
-                /**
-                 * Returns the object whose event listener's callback is currently being invoked.
-                 */
-                readonly currentTarget: EventTarget | null;
-                /**
-                 * Returns true if preventDefault() was invoked successfully to indicate cancelation, and false otherwise.
-                 */
-                readonly defaultPrevented: boolean;
-                /**
-                 * Returns the event's phase, which is one of NONE, CAPTURING_PHASE, AT_TARGET, and BUBBLING_PHASE.
-                 */
-                readonly eventPhase: number;
-                /**
-                 * Returns true if event was dispatched by the user agent, and false otherwise.
-                 */
-                readonly isTrusted: boolean;
-                returnValue: boolean;
-                /** @deprecated */
-                readonly srcElement: EventTarget | null;
-                /**
-                 * Returns the object to which event is dispatched (its target).
-                 */
-                readonly target: EventTarget | null;
-                /**
-                 * Returns the event's timestamp as the number of milliseconds measured relative to the time origin.
-                 */
-                readonly timeStamp: number;
-                /**
-                 * Returns the type of event, e.g. "click", "hashchange", or "submit".
-                 */
-                readonly type: string;
-                /**
-                 * Returns the invocation target objects of event's path (objects on which listeners will be invoked), except for any nodes in shadow trees of which the shadow root's mode is "closed" that are not reachable from event's currentTarget.
-                 */
-                composedPath(): EventTarget[];
-                initEvent(type: string, bubbles?: boolean, cancelable?: boolean): void;
-                /**
-                 * If invoked when the cancelable attribute value is true, and while executing a listener for the event with passive set to false, signals to the operation that caused event to be dispatched that it needs to be canceled.
-                 */
-                preventDefault(): void;
-                /**
-                 * Invoking this method prevents event from reaching any registered event listeners after the current one finishes running and, when dispatched in a tree, also prevents event from reaching any other objects.
-                 */
-                stopImmediatePropagation(): void;
-                /**
-                 * When dispatched in a tree, invoking this method prevents event from reaching any objects other than the current object.
-                 */
-                stopPropagation(): void;
-                readonly AT_TARGET: number;
-                readonly BUBBLING_PHASE: number;
-                readonly CAPTURING_PHASE: number;
-                readonly NONE: number;
-            }</code>
-        </pre>
+        <h2>5. Объект события</h2>
+        <p style="font-size: 2rem;">Например:</p>
+        <pre><code data-line-numbers="1-10">function handler(e) {
+  const ourEl = e.currentTarget;
+}
+
+el.addEventListener('submit', handler)</code></pre>
+
+        <p style="font-size: 2rem;">Интерфейс события:</p>
+        <pre><code data-line-numbers="1-70" style="max-height: 300px;">/** An event which takes place in the DOM. */
+interface Event {
+  /**
+    * Returns true or false depending on how event was initialized. True if event goes through its target's ancestors in reverse tree order, and false otherwise.
+    */
+  readonly bubbles: boolean;
+  cancelBubble: boolean;
+  /**
+    * Returns true or false depending on how event was initialized. Its return value does not always carry meaning, but true can indicate that part of the operation during which event was dispatched, can be canceled by invoking the preventDefault() method.
+    */
+  readonly cancelable: boolean;
+  /**
+    * Returns true or false depending on how event was initialized. True if event invokes listeners past a ShadowRoot node that is the root of its target, and false otherwise.
+    */
+  readonly composed: boolean;
+  /**
+    * Returns the object whose event listener's callback is currently being invoked.
+    */
+  readonly currentTarget: EventTarget | null;
+  /**
+    * Returns true if preventDefault() was invoked successfully to indicate cancelation, and false otherwise.
+    */
+  readonly defaultPrevented: boolean;
+  /**
+    * Returns the event's phase, which is one of NONE, CAPTURING_PHASE, AT_TARGET, and BUBBLING_PHASE.
+    */
+  readonly eventPhase: number;
+  /**
+    * Returns true if event was dispatched by the user agent, and false otherwise.
+    */
+  readonly isTrusted: boolean;
+  returnValue: boolean;
+  /** @deprecated */
+  readonly srcElement: EventTarget | null;
+  /**
+    * Returns the object to which event is dispatched (its target).
+    */
+  readonly target: EventTarget | null;
+  /**
+    * Returns the event's timestamp as the number of milliseconds measured relative to the time origin.
+    */
+  readonly timeStamp: number;
+  /**
+    * Returns the type of event, e.g. "click", "hashchange", or "submit".
+    */
+  readonly type: string;
+  /**
+    * Returns the invocation target objects of event's path (objects on which listeners will be invoked), except for any nodes in shadow trees of which the shadow root's mode is "closed" that are not reachable from event's currentTarget.
+    */
+  composedPath(): EventTarget[];
+  initEvent(type: string, bubbles?: boolean, cancelable?: boolean): void;
+  /**
+    * If invoked when the cancelable attribute value is true, and while executing a listener for the event with passive set to false, signals to the operation that caused event to be dispatched that it needs to be canceled.
+    */
+  preventDefault(): void;
+  /**
+    * Invoking this method prevents event from reaching any registered event listeners after the current one finishes running and, when dispatched in a tree, also prevents event from reaching any other objects.
+    */
+  stopImmediatePropagation(): void;
+  /**
+    * When dispatched in a tree, invoking this method prevents event from reaching any objects other than the current object.
+    */
+  stopPropagation(): void;
+  readonly AT_TARGET: number;
+  readonly BUBBLING_PHASE: number;
+  readonly CAPTURING_PHASE: number;
+  readonly NONE: number;
+}</code></pre>
         <ul style="display: flex;">
           <li><span class="txt__highlighted">event.type</span></li>
           <li><span class="txt__highlighted">event.currentTarget</span></li>
@@ -308,6 +318,45 @@ someElement.addEventListener('click', () => // happen something);
           </li>
           <li></li>
         </ul>
+      </section>
+      <section>
+        <section>
+          <h2 style="font-size: 3rem; ">6. Всплытие и погружение</h2>
+          <p><span class="txt__highlighted">Принцип всплытия</span> - когда на элементе происходит событие, обработчики
+            сначала срабатывают на нём, потом на его родителе, затем
+            выше и так далее, вверх по цепочке предков.</p>
+          <p><span class="txt__highlighted">event.target</span> - самый глубокий элемент, который вызывает событие,
+            элемент, на котром произошло событие.</p>
+          <p><span class="txt__highlighted">event.stopPropagation()</span> - прекращение всплытия. Всплытие идёт с
+            «целевого» элемента наверх и по умолчанию будет всплывать до элемента &lt;html>, а затем до объекта
+            document,
+            а иногда даже до window, вызывая все обработчики на своём пути.</p>
+          <p><span class="txt__highlighted">Погружение</span> - Фаза погружения (capturing phase) DOM события.</p>
+          <pre style="font-size: 1.5rem; margin:0"><code data-line-numbers="1-10">elem.addEventListener(..., {capture: true})
+// или просто "true", как сокращение для {capture: true}
+elem.addEventListener(..., true)</code></pre>
+        </section>
+        <section style="text-align: center;">
+          <img src="https://learn.javascript.ru/article/bubbling-and-capturing/eventflow.svg" />
+        </section>
+      </section>
+      <section>
+        <h2>7. Делегирование</h2>
+        <p style="font-size: 1.5rem; margin: 10px 0 30px; line-height: 2.625rem;"><span class="txt__highlighted">Главная
+            идея: </span> у вас есть
+          много элементов, события на которых нужно
+          обрабатывать похожим образом, мы ставим один обработчик на их общего предка.
+          Из него получаем целевой элемент event.target - потомок, на котором произошло событие, и обработать его.</p>
+        <span style="font-size: 1.5rem; line-height: 2.625rem;" class="txt__highlighted">Алгоритм
+          применения:</span>
+        <div style="font-size: 1.5rem; padding-left: 40px;">
+          <p>1. Вешаем обработчик на контейнер.</p>
+          <p>2. В обработчике проверяем исходный элемент event.target.</p>
+          <p>3. Если событие произошло внутри нужного нам элемента, то обрабатываем его.</p>
+        </div>
+      </section>
+      <section>
+        <h3>Теперь вы знаете достаточно, чтобы создать отзывчивый интерфейс.</h3>
       </section>
     </div>
   </div>
