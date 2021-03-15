@@ -35,17 +35,17 @@
   font-weight: bold;
 }
 .result__prev {
+  height: 50px;
   color: rgba(255, 255, 255, 0.5);
   font-size: 1.5rem;
 }
 .result__curr {
+  width: 388px;
+  min-height: 45px;
   color: rgba(255, 255, 255, 15);
   font-size: 2rem;
-}
-
-.btns {
-  display: grid;
-  grid-template-columns: repeat(4, 100px);
+  line-height: 2.25rem;
+  word-break: break-all;
 }
 
 .btns > button {
@@ -53,4 +53,21 @@
   height: 100px;
   color: rgba(255, 255, 255, 0.8);
   font-weight: bold;
+}
+
+.btns {
+  display: grid;
+  grid-template-columns: repeat(4, 100px);
+}
+
+.btns > .ac {
+  grid-column-start: 1;
+  grid-column-end: 3;
+  width: 200px;
+}
+
+.btns > .eq {
+  grid-column-start: 3;
+  grid-column-end: 5;
+  width: 200px;
 }
