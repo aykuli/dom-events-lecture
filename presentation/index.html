@@ -28,26 +28,28 @@
       <section class="content">
         <h2>Содержание:</h2>
         <ul>
-          <li>1. Событие. Определение.</li>
-          <li>2. Интерфейсы, основанные на Event. Полный список с MDN.</li>
-          <li>3. С каких событий начать?</li>
-          <li>4. Обработчик событий
+          <li style="font-size: 1.2rem; padding: 5px;">1. Событие. Определение.</li>
+          <li style="font-size: 1.2rem;padding: 5px;">2. Интерфейсы, основанные на Event. Полный список с MDN.</li>
+          <li style="font-size: 1.2rem;padding: 5px;">3. С каких событий начать?</li>
+          <li style="font-size: 1.2rem;padding: 5px;">4. Обработчик событий
             <ul>Способы привязать обработчик к определенному
               событию:
-              <li style="padding: 10px 0;">4.1. В DOM-дереве c атрибутом on&lt;cобытие></li>
-              <li>4.2. Присвоить свойство DOM-объекту</li>
-              <li>4.3. Регистрация обработчика на target</li>
-              <li>4.4. Исключения</li>
+              <li style="padding: 10px 0 5px; font-size: 1.2rem;">4.1. В DOM-дереве c атрибутом on&lt;cобытие></li>
+              <li style="font-size: 1.2rem;padding: 5px;">4.2. Присвоить свойство DOM-объекту</li>
+              <li style="font-size: 1.2rem;padding: 5px;">4.3. Регистрация обработчика на target</li>
+              <li style="font-size: 1.2rem;padding: 5px;">4.4. Исключения</li>
             </ul>
           </li>
-          <li>5. Объект события</li>
-          <li>6. Всплытие и погружение</li>
-          <li>7. Делегирование</li>
+          <li style="font-size: 1.2rem;padding: 5px;">5. Объект события</li>
+          <li style="font-size: 1.2rem;padding: 5px;">6. Всплытие и погружение</li>
+          <li style="font-size: 1.2rem;padding: 5px;">7. Делегирование</li>
+          <li style="font-size: 1.2rem;padding: 5px;">8. Действия браузера по умолчанию</li>
+          <li style="font-size: 1.2rem;padding: 5px;">9. Свои события</li>
         </ul>
       </section>
       <section>
         <h2>1. Событие</h2>
-        <p style="font-size: 3rem;"> – это сигнал от браузера о том, что что-то произошло. <span
+        <p style="font-size: 3rem;"> – это сигнал от браузера о том, что что-то произошло.<span
             class="txt__highlighted">Все</span> DOM-узлы
           подают такие сигналы.</p>
       </section>
@@ -81,7 +83,6 @@
               <li><a class="page-not-created"
                   title="The documentation about this has not yet been written; please consider contributing!"><code>EditingBeforeInputEvent</code></a>
               </li>
-
             </ul>
             <ul>
               <li><a href="/en-US/docs/Web/API/ErrorEvent"><code>ErrorEvent</code></a></li>
@@ -211,19 +212,19 @@ someElement.addEventListener('click', () => // happen something);
           <pre style="font-size: 1.5rem; width: 100%;"><code data-line-numbers="1-10">target.addEventListener(type, listener[, options]);
 </code></pre>
           <p>где <span class="txt__highlighted">type</span> - тип прослушиваемого события,</p>
-          <p style="padding-left: 34px;"><span class="txt__highlighted">listener</span> - функция обработчик,</p>
-          <p style="padding-left: 34px;"><span class="txt__highlighted">options(опционально)</span> - определяет
+          <p style="padding-left: 34px;"><span class="txt__highlighted">listener</span>функция обработчик,</p>
+          <p style="padding-left: 34px;"><span class="txt__highlighted">options(опционально)</span> определяет
             характеристики объекта,
             прослушивающего событие:</p>
-          <p style="padding-left: 34px;"><span class="txt__highlighted">capture: Boolean</span> - указывает, что события
+          <p style="padding-left: 80px;"><span class="txt__highlighted">capture: Boolean</span>указывает, что события
             этого типа будут
             отправлены зарегистрированному слушателю listener перед отправкой на EventTarget, расположенный ниже в
             дереве
             DOM.</p>
-          <p style="padding-left: 34px;"><span class="txt__highlighted">once: Boolean</span> - указывает, что слушатель
+          <p style="padding-left: 80px;"><span class="txt__highlighted">once: Boolean</span> указывает, что слушатель
             должен быть вызван
             не более одного раза после добавления. Если true, слушатель автоматически удаляется при вызове.</p>
-          <p style="padding-left: 34px;"><span class="txt__highlighted">passive: Boolean</span> - указывает, что
+          <p style="padding-left: 80px;"><span class="txt__highlighted">passive: Boolean</span> указывает, что
             слушатель никогда не вызовет
             preventDefault().</p>
         </section>
@@ -350,13 +351,141 @@ elem.addEventListener(..., true)</code></pre>
         <span style="font-size: 1.5rem; line-height: 2.625rem;" class="txt__highlighted">Алгоритм
           применения:</span>
         <div style="font-size: 1.5rem; padding-left: 40px;">
-          <p>1. Вешаем обработчик на контейнер.</p>
+          <p>1. Вешаем обработчик на родитель.</p>
           <p>2. В обработчике проверяем исходный элемент event.target.</p>
           <p>3. Если событие произошло внутри нужного нам элемента, то обрабатываем его.</p>
         </div>
       </section>
       <section>
-        <h3>Теперь вы знаете достаточно, чтобы создать отзывчивый интерфейс.</h3>
+        <section>
+          <h2>8. Действия браузера по умолчанию</h2>
+          <h5>Например:</h5>
+          <table class="table">
+            <tr>
+              <td style="border-bottom: none;">
+                <span style="margin: 0" class="txt__highlighted">mousedown</span>
+              </td>
+              <td style="border-bottom: none;">начинает выделять текст</td>
+            </tr>
+            <tr>
+              <td style="border-bottom: none;">
+                <span style="margin: 0" class="txt__highlighted">click</span>
+              </td>
+              <td style="border-bottom: none;">
+                на теге &lt;a> - переход по ссылке, начинает выделять текст, &lt;input type="checkbox"> – ставит или
+                убирает галочку.
+              </td>
+            </tr>
+            <tr>
+              <td style="border-bottom: none;">
+                <span style="margin: 0" class="txt__highlighted">contextmenu</span>
+              </td>
+              <td style="border-bottom: none;">
+                при правом клике показывается контекстное меню браузера.
+              </td>
+            </tr>
+          </table>
+
+        </section>
+        <section>
+          <h5 style="margin-top: 35px">Если нам нужно изменить поведение браузера по умолчанию:</h5>
+          <table class="table">
+            <tr>
+              <td style="border-bottom: none;">
+                <span style="margin: 0" class="txt__highlighted">event.preventDefault()</span>
+              </td>
+              <td style="border-bottom: none;"></td>
+            </tr>
+            <tr>
+              <td style="border-bottom: none; display: flex; align-items: flex-start; margin-top: 10px">
+                <span style="margin: 0" class="txt__highlighted">return false</span>
+              </td>
+              <td style="border-bottom: none;">
+                Если же обработчик назначен через on&lt;событие> (не через addEventListener), то также можно вернуть
+                false
+                из обработчика.
+                <pre
+                  style="font-size: 1.2rem; margin-left: 0;"><code data-line-numbers="1-10"><a href="/" onclick="return false">Отправить</a></code></pre>
+              </td>
+            </tr>
+          </table>
+          <h5 style="margin-top: 35px">Есть события, которые происходят, если произошло другое пределенное событие:</h5>
+          <table class="table" style="margin-left: 0">
+            <tr>
+              <td style="border-bottom: none;">
+                <span style="margin: 0" class="txt__highlighted">mousedown</span>
+              </td>
+              <td style="border-bottom: none;"> для &lt;input></td>
+            </tr>
+          </table>
+        </section>
+      </section>
+      <section>
+        <section>
+          <h2>9. Свои события</h2>
+          <pre
+            style="font-size: 1.2rem; margin-left: 0;"><code data-line-numbers="1-10">const event = new Event(type[, options]);    </code></pre>
+          <pre
+            style="font-size: 1.2rem; margin-left: 0;"><code data-line-numbers="1-10">const event = new Event('aynurEvent');</code></pre>
+
+          <p>где <span class="txt__highlighted">type</span> - тип события,</p>
+          <p style="padding-left: 34px;"><span class="txt__highlighted">options(опционально)</span> - определяет
+            характеристики объекта, прослушивающего событие:</p>
+          <p style="padding-left: 80px;"><span class="txt__highlighted">bubbles: Boolean</span> - если true, тогда
+            событие
+            всплывает.</p>
+          <p style="padding-left: 80px;"><span class="txt__highlighted">cancelable: Boolean</span> - если true, тогда
+            можно отменить действие по умолчанию.</p>
+          <p style="padding-left: 80px;"><span class="txt__highlighted">composed: Boolean</span> - если true, тогда
+            событие будет всплывать наружу за пределы Shadow DOM.</p>
+          <p>По умолчанию все три свойства установлены в false:<br />
+          <p class="txt__highlighted" style="margin-right: 580px;">
+            { bubbles: false, cancelable: false, composed: false }
+          </p>
+          </p>
+        </section>
+        <section>
+          <table class="table" style="margin-left: 0">
+            <tr>
+              <td style="border-bottom: none;">
+                <span style="margin: 0" class="txt__highlighted">elem.dispatchEvent(event)</span>
+              </td>
+              <td style="border-bottom: none;">После того, как объект события создан, мы
+                должны запустить его на элементе.</td>
+            </tr>
+            <tr>
+              <td style="border-bottom: none;">
+                <span style="margin: 0" class="txt__highlighted">addEventListener</span>
+              </td>
+              <td style="border-bottom: none;">для наших собственных событий, т.к.
+                on&lt;event>-свойства существуют
+                только для встроенных событий, то есть document.onhello не сработает.</td>
+            </tr>
+            <tr>
+              <td style="border-bottom: none;">
+                <span style="margin: 0" class="txt__highlighted">bubbles:true</span>
+              </td>
+              <td style="border-bottom: none;">передават обязательно, иначе наше событие не будет
+                всплывать.</td>
+            </tr>
+            <tr>
+              <td style="border-bottom: none;">
+                <span style="margin: 0" class="txt__highlighted">event.isTrusted</span>
+              </td>
+              <td style="border-bottom: none;">Свойство event.isTrusted принимает значение true для событий, порождаемых
+                реальными действиями пользователя,
+                и false для генерируемых кодом.</td>
+            </tr>
+          </table>
+        </section>
+      </section>
+      <section>
+        <h1>Теперь вы знаете достаточно, чтобы создать отзывчивый интерфейс.</h1>
+        <p>Что я могла забыть показать:</p>
+        <ul style="list-style: square;">
+          <li>в мозилле как смотреть в DOM-дереве привязанный обработчик</li>
+          <li>что будет в следующей лекции</li>
+        </ul>
       </section>
     </div>
   </div>

@@ -43,6 +43,11 @@ a:focus {
   line-height: 1rem;
 }
 
+.events--list {
+  display: flex;
+  justify-content: space-between;
+}
+
 .events--list a {
   font-size: 1rem;
   line-height: 1rem;
@@ -55,4 +60,8 @@ a:focus {
   list-style: none;
   padding-top: 15px;
   margin: 0;
+}
+
+.table {
+  margin-left: 0;
 }
